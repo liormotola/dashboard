@@ -48,6 +48,7 @@ def analyze_data(df: pd.DataFrame):
     src=os.getcwd()
     shutil.copy(os.path.join(src,"index.html"),dir_path)
     shutil.copy(os.path.join(src,"script.js"),dir_path)
+    os.remove(os.path.join(src,"data.xlsx"))
 
 
 
