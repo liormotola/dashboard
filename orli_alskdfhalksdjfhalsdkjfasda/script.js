@@ -109,12 +109,12 @@ data.then((data) => {
         stage: {
             labels: devidedData_stage.labels,
             data: devidedData_stage.data,
-            colors: ['#4facfe', '#00f2fe', '#a8edea', '#fed6e3'],
+            colors: ['#4facfe', '#00f2fe', '#a8edea', '#fed6e3', '#694ffe'],
         },
         supervision: {
             labels: devidedData_supervision.labels,
             data: devidedData_supervision.data,
-            colors: ['#d299c2', '#fef9d7'],
+            colors: ['#d299c2', '#fef9d7', '#a2d5c6'],
         },
     }
 
@@ -193,24 +193,23 @@ data.then((data) => {
     ratingsContainer.appendChild(leftColumn)
     ratingsContainer.appendChild(rightColumn)
 
-
     // ##### Create Feedbacks #####
 
-    const feedbacks = data["משובים מילוליים מהמשתתפים"] || []
-     const container = document.getElementById('feedbackContainer');
-                feedbacks.forEach((feedback, index) => {
-                    const feedbackItem = document.createElement('div');
-                    feedbackItem.className = 'feedback-item';
-                    feedbackItem.style.opacity = '0';
-                    feedbackItem.style.transform = 'translateY(20px)';
-                    feedbackItem.innerHTML = `<div class="feedback-text">${feedback}</div>`;
-                    container.appendChild(feedbackItem);
+    const feedbacks = data['משובים מילוליים מהמשתתפים'] || []
+    const container = document.getElementById('feedbackContainer')
+    feedbacks.forEach((feedback, index) => {
+        const feedbackItem = document.createElement('div')
+        feedbackItem.className = 'feedback-item'
+        feedbackItem.style.opacity = '0'
+        feedbackItem.style.transform = 'translateY(20px)'
+        feedbackItem.innerHTML = `<div class="feedback-text">${feedback}</div>`
+        container.appendChild(feedbackItem)
 
-                    // אנימציה כניסה
-                    setTimeout(() => {
-                        feedbackItem.style.opacity = '1';
-                        feedbackItem.style.transform = 'translateY(0)';
-                        feedbackItem.style.transition = 'all 0.5s ease';
-                    }, index * 100 + 1000);
-                });
+        // אנימציה כניסה
+        setTimeout(() => {
+            feedbackItem.style.opacity = '1'
+            feedbackItem.style.transform = 'translateY(0)'
+            feedbackItem.style.transition = 'all 0.5s ease'
+        }, index * 100 + 1000)
+    })
 })
