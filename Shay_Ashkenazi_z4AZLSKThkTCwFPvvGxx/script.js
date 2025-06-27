@@ -58,6 +58,9 @@ data.then((data) => {
     // instructor name
     writeDataToElement('.data_instructor', data['שם המרצה'])
 
+    // course name
+    writeDataToElement('.data_course', data['שם הקורס'])
+
     // number of participants
     writeDataToElement('.data_num_participants', data['מספר משתתפים'])
 
