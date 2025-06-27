@@ -58,9 +58,6 @@ data.then((data) => {
     // instructor name
     writeDataToElement('.data_instructor', data['שם המרצה'])
 
-    // date
-    writeDataToElement('.data_date', data['תאריך הסקר'])
-
     // number of participants
     writeDataToElement('.data_num_participants', data['מספר משתתפים'])
 
@@ -158,7 +155,7 @@ data.then((data) => {
         }))
         .sort((a, b) => b.score - a.score)
 
-    const container = document.getElementById('ratingsContainer')
+    const ratingsContainer = document.getElementById('ratingsContainer')
 
     // חלוקה לשתי עמודות
     const leftColumn = document.createElement('div')
@@ -193,9 +190,27 @@ data.then((data) => {
         }, (index % Math.ceil(ratings.length / 2)) * 150 + 500)
     })
 
-    container.appendChild(leftColumn)
-    container.appendChild(rightColumn)
+    ratingsContainer.appendChild(leftColumn)
+    ratingsContainer.appendChild(rightColumn)
 
 
     // ##### Create Feedbacks #####
+
+    const feedbacks = data["משובים מילוליים מהמשתתפים"] || []
+     const container = document.getElementById('feedbackContainer');
+                feedbacks.forEach((feedback, index) => {
+                    const feedbackItem = document.createElement('div');
+                    feedbackItem.className = 'feedback-item';
+                    feedbackItem.style.opacity = '0';
+                    feedbackItem.style.transform = 'translateY(20px)';
+                    feedbackItem.innerHTML = `<div class="feedback-text">${feedback}</div>`;
+                    container.appendChild(feedbackItem);
+
+                    // אנימציה כניסה
+                    setTimeout(() => {
+                        feedbackItem.style.opacity = '1';
+                        feedbackItem.style.transform = 'translateY(0)';
+                        feedbackItem.style.transition = 'all 0.5s ease';
+                    }, index * 100 + 1000);
+                });
 })
