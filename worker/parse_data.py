@@ -4,8 +4,8 @@ import numpy as np
 import json
 from pprint import pprint
 
-instructor = "אורלי"
-threshold = 4
+instructor = "שי אשכנזי"
+threshold = 4.5
 
 def analyze_data(df: pd.DataFrame):
 
@@ -15,7 +15,8 @@ def analyze_data(df: pd.DataFrame):
 
     means = df[numerical_col2].mean()
     final_data = {key: round(val,2) for key, val in means.to_dict().items()}
-    final_data["threshold"] = sum(1 for val in final_data.values() if val > threshold) == len(numerical_col2)
+    final_data["threshold"] = threshold
+    final_data["above_threshold"] = sum(1 for val in final_data.values() if val > threshold) == len(numerical_col2)
     # Count value occurrences for each categorical column
     for col in categorical_cols:
         final_data[col]=df[col].value_counts(dropna=False).to_dict()
