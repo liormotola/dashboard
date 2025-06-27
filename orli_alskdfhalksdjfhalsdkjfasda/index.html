@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>דשבורד תוצאות סקר - כלים אימוניים להתמודדות עם הפרעת קשב</title>
+
+    <script src="./script.js" defer></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <style>
         * {
@@ -408,8 +411,11 @@
     <div class="container">
         <div class="header">
             <h1>דשבורד תוצאות סקר הערכה</h1>
-            <div class="subtitle">כלים אימוניים להתמודדות עם הפרעת קשב - ד"ר אורלי</div>
-            <div class="meta">אפריל-מאי 2025 | 27 משתתפים | ציון כללי: 4.67/5</div>
+            <div class="subtitle">כלים אימוניים להתמודדות עם הפרעת קשב - <span id="data_instructor"></span></div>
+            <div class="meta">
+              מספר משתתפים: <span id="data_num_participants"></span> | תאריך הסקר: <span id="data_date"></span> | ציון כללי: <span id="data_overall_score"></span>
+            </div>
+            <!-- <div class="meta">אפריל-מאי 2025 | 27 משתתפים | ציון כללי: 4.67/5</div> -->
         </div>
 
         <div class="stats-overview">
@@ -466,131 +472,131 @@
             <div class="feedback-grid" id="feedbackContainer"></div>
         </div>
 
-    <script>
-        // נתוני הסקר מעובדים מהקובץ המקורי
-        const surveyData = {
-            experience: {
-                labels: ['1-5 שנים', '6-10 שנים', '11-15 שנים', '16-20 שנים', '21+ שנים'],
-                data: [5, 8, 7, 2, 5],
-                colors: ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57']
-            },
-            framework: {
-                labels: ['חינוך רגיל', 'חינוך מיוחד'],
-                data: [17, 10],
-                colors: ['#667eea', '#764ba2']
-            },
-            stage: {
-                labels: ['יסודי', 'קדם יסודי', 'חט"ב', 'חט"ע'],
-                data: [17, 6, 3, 1],
-                colors: ['#4facfe', '#00f2fe', '#a8edea', '#fed6e3']
-            },
-            supervision: {
-                labels: ['ממלכתי', 'חמ"ד'],
-                data: [18, 9],
-                colors: ['#d299c2', '#fef9d7']
-            }
-        };
-
-        // נתוני הציונים מעובדים מהנתונים המקוריים
-        const ratings = [
-            { text: 'למידה פעילה ושיתופית', score: 4.89, color: '#4caf50' },
-            { text: 'התעוררות שאלות וסקרנות חדשות', score: 4.89, color: '#4caf50' },
-            { text: 'המלצה על הקורס לחברים', score: 4.89, color: '#4caf50' },
-            { text: 'בחירה חוזרת בקורס', score: 4.81, color: '#4caf50' },
-            { text: 'אפשרות העמקה בנושא מעניין', score: 4.78, color: '#4caf50' },
-            { text: 'יכולת ליישם את הנלמד בתפקיד', score: 4.74, color: '#4caf50' },
-            { text: 'הזדמנויות לבחירה ועבודה עצמית', score: 4.67, color: '#2196f3' },
-            { text: 'התנסות במגוון דרכי למידה', score: 4.59, color: '#2196f3' },
-            { text: 'שיפור איכות ההוראה', score: 4.48, color: '#ff9800' },
-            { text: 'קידום נושאים בעקבות הלמידה', score: 4.44, color: '#ff9800' },
-            { text: 'חקר הצלחות כחלק מהחיבור לשטח', score: 4.44, color: '#ff9800' }
-        ];
-
-        // משובים מילוליים מהקובץ המקורי
-        const feedbacks = [
-            "קורס מדהים עם מדריכה מדהימה",
-            "מרצה מהממת ומקצועית - תודה, היה ממש מעניין מעשיר ומלמד",
-            "אורלי מקצועית ביותר!!! והכי חשוב מקסימה ואנושית",
-            "מרצה מעולה!! קורס מעניין ומעשיר ולדעתי חובה לכל איש חינוך. מומלץ מאוד!",
-            "המרצה אורלי מהממת, מלהיבה על החומר שנלמד וממש מרתקת",
-            "אורלי מהממת! היא העבירה את ההשתלמות באופן מעניין. ביקשה מאיתנו לשתף בהתמודדויות וביחד חשבנו על דרכי פתרון והתייעצנו",
-            "המרצה מדהימה!!! מעניינת, קשובה, מלמדת בצורה מעשית",
-            "אורלי העבירה קורס מדהים חשוב מעצים - כל מורה בישראל צריכה ללמוד תכנים אלו. אשמח ללמוד ממנה שוב",
-            "זו ההשתלמות המקצועית והמעמיקה ביותר שעשיתי. אורלי בעלת ידע רב, שהועבר בצורה ברורה ומעניינת",
-            "תודה רבה לאורלי על השיתוף, העברת הדברים בצורה ברורה ונעימה. על מענה לשאלות ורגישות",
-            "ההשתלמות הועברה במקצועיות וברגישות. עם העשרה בפן הרגשי ובפן האישי",
-            "למדתי הרבה שיטות שעזרו לי איך להתמודד עם התלמידים",
-            "אורלי היא מרצה שמעבירה את החומר הנלמד בדרך מקצועית, מעניינת שתרמה לי רבות",
-            "תודה רבה על השתלמות מקצועית ברמה גבוהה, מהנה ומלמדת",
-            "הקורס היה מעולה, מעשיר, דוגמאות אישיות, העמקה בחומר, מאוד מעניין ולמדתי רבות",
-            "אורלי פשוט השראה ומודל לחיקוי. שינתה לי את התפיסה שלי כאמא ומורה",
-            "תודה רבה על הקורס. היה מאוד מלמד ומעשיר",
-            "אורלי תודה רבה על למידה וכלים מעשיים ופרקטיים. את היית המודלינג והסיפור האישי שנתן השראה",
-            "מרצה מרתקת, משתפת ומעבירה את החומר בצורה מאוד נעימה",
-            "הקורס כל כך חשוב וחיוני לכל מורה והורה - הכלים מאפשרים התמודדות, הכלה והבנה מול בעלי קושי קשבי"
-        ];
-
-        // יצירת גרפים
-        function createChart(canvasId, data, type = 'doughnut') {
-            const ctx = document.getElementById(canvasId).getContext('2d');
-            new Chart(ctx, {
-                type: type,
-                data: {
-                    labels: data.labels,
-                    datasets: [{
-                        data: data.data,
-                        backgroundColor: data.colors,
-                        borderWidth: 2,
-                        borderColor: '#fff'
-                    }]
+        <script>
+            // נתוני הסקר מעובדים מהקובץ המקורי
+            const surveyData = {
+                experience: {
+                    labels: ['1-5 שנים', '6-10 שנים', '11-15 שנים', '16-20 שנים', '21+ שנים'],
+                    data: [5, 8, 7, 2, 5],
+                    colors: ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57']
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: {
-                                usePointStyle: true,
-                                padding: 20,
-                                font: {
-                                    size: 13
+                framework: {
+                    labels: ['חינוך רגיל', 'חינוך מיוחד'],
+                    data: [17, 10],
+                    colors: ['#667eea', '#764ba2']
+                },
+                stage: {
+                    labels: ['יסודי', 'קדם יסודי', 'חט"ב', 'חט"ע'],
+                    data: [17, 6, 3, 1],
+                    colors: ['#4facfe', '#00f2fe', '#a8edea', '#fed6e3']
+                },
+                supervision: {
+                    labels: ['ממלכתי', 'חמ"ד'],
+                    data: [18, 9],
+                    colors: ['#d299c2', '#fef9d7']
+                }
+            };
+
+            // נתוני הציונים מעובדים מהנתונים המקוריים
+            const ratings = [
+                { text: 'למידה פעילה ושיתופית', score: 4.89, color: '#4caf50' },
+                { text: 'התעוררות שאלות וסקרנות חדשות', score: 4.89, color: '#4caf50' },
+                { text: 'המלצה על הקורס לחברים', score: 4.89, color: '#4caf50' },
+                { text: 'בחירה חוזרת בקורס', score: 4.81, color: '#4caf50' },
+                { text: 'אפשרות העמקה בנושא מעניין', score: 4.78, color: '#4caf50' },
+                { text: 'יכולת ליישם את הנלמד בתפקיד', score: 4.74, color: '#4caf50' },
+                { text: 'הזדמנויות לבחירה ועבודה עצמית', score: 4.67, color: '#2196f3' },
+                { text: 'התנסות במגוון דרכי למידה', score: 4.59, color: '#2196f3' },
+                { text: 'שיפור איכות ההוראה', score: 4.48, color: '#ff9800' },
+                { text: 'קידום נושאים בעקבות הלמידה', score: 4.44, color: '#ff9800' },
+                { text: 'חקר הצלחות כחלק מהחיבור לשטח', score: 4.44, color: '#ff9800' }
+            ];
+
+            // משובים מילוליים מהקובץ המקורי
+            const feedbacks = [
+                "קורס מדהים עם מדריכה מדהימה",
+                "מרצה מהממת ומקצועית - תודה, היה ממש מעניין מעשיר ומלמד",
+                "אורלי מקצועית ביותר!!! והכי חשוב מקסימה ואנושית",
+                "מרצה מעולה!! קורס מעניין ומעשיר ולדעתי חובה לכל איש חינוך. מומלץ מאוד!",
+                "המרצה אורלי מהממת, מלהיבה על החומר שנלמד וממש מרתקת",
+                "אורלי מהממת! היא העבירה את ההשתלמות באופן מעניין. ביקשה מאיתנו לשתף בהתמודדויות וביחד חשבנו על דרכי פתרון והתייעצנו",
+                "המרצה מדהימה!!! מעניינת, קשובה, מלמדת בצורה מעשית",
+                "אורלי העבירה קורס מדהים חשוב מעצים - כל מורה בישראל צריכה ללמוד תכנים אלו. אשמח ללמוד ממנה שוב",
+                "זו ההשתלמות המקצועית והמעמיקה ביותר שעשיתי. אורלי בעלת ידע רב, שהועבר בצורה ברורה ומעניינת",
+                "תודה רבה לאורלי על השיתוף, העברת הדברים בצורה ברורה ונעימה. על מענה לשאלות ורגישות",
+                "ההשתלמות הועברה במקצועיות וברגישות. עם העשרה בפן הרגשי ובפן האישי",
+                "למדתי הרבה שיטות שעזרו לי איך להתמודד עם התלמידים",
+                "אורלי היא מרצה שמעבירה את החומר הנלמד בדרך מקצועית, מעניינת שתרמה לי רבות",
+                "תודה רבה על השתלמות מקצועית ברמה גבוהה, מהנה ומלמדת",
+                "הקורס היה מעולה, מעשיר, דוגמאות אישיות, העמקה בחומר, מאוד מעניין ולמדתי רבות",
+                "אורלי פשוט השראה ומודל לחיקוי. שינתה לי את התפיסה שלי כאמא ומורה",
+                "תודה רבה על הקורס. היה מאוד מלמד ומעשיר",
+                "אורלי תודה רבה על למידה וכלים מעשיים ופרקטיים. את היית המודלינג והסיפור האישי שנתן השראה",
+                "מרצה מרתקת, משתפת ומעבירה את החומר בצורה מאוד נעימה",
+                "הקורס כל כך חשוב וחיוני לכל מורה והורה - הכלים מאפשרים התמודדות, הכלה והבנה מול בעלי קושי קשבי"
+            ];
+
+            // יצירת גרפים
+            function createChart(canvasId, data, type = 'doughnut') {
+                const ctx = document.getElementById(canvasId).getContext('2d');
+                new Chart(ctx, {
+                    type: type,
+                    data: {
+                        labels: data.labels,
+                        datasets: [{
+                            data: data.data,
+                            backgroundColor: data.colors,
+                            borderWidth: 2,
+                            borderColor: '#fff'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    usePointStyle: true,
+                                    padding: 20,
+                                    font: {
+                                        size: 13
+                                    }
                                 }
-                            }
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function (context) {
-                                    return context.label + ': ' + context.parsed + ' משתתפים';
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        return context.label + ': ' + context.parsed + ' משתתפים';
+                                    }
                                 }
                             }
                         }
                     }
-                }
-            });
-        }
+                });
+            }
 
-        // יצירת כל הגרפים
-        createChart('experienceChart', surveyData.experience);
-        createChart('frameworkChart', surveyData.framework);
-        createChart('stageChart', surveyData.stage);
-        createChart('supervisionChart', surveyData.supervision);
+            // יצירת כל הגרפים
+            createChart('experienceChart', surveyData.experience);
+            createChart('frameworkChart', surveyData.framework);
+            createChart('stageChart', surveyData.stage);
+            createChart('supervisionChart', surveyData.supervision);
 
-        // יצירת פסי הציונים
-        function createRatings() {
-            const container = document.getElementById('ratingsContainer');
+            // יצירת פסי הציונים
+            function createRatings() {
+                const container = document.getElementById('ratingsContainer');
 
-            // חלוקה לשתי עמודות
-            const leftColumn = document.createElement('div');
-            const rightColumn = document.createElement('div');
+                // חלוקה לשתי עמודות
+                const leftColumn = document.createElement('div');
+                const rightColumn = document.createElement('div');
 
-            ratings.forEach((rating, index) => {
-                const ratingItem = document.createElement('div');
-                ratingItem.className = 'rating-item';
+                ratings.forEach((rating, index) => {
+                    const ratingItem = document.createElement('div');
+                    ratingItem.className = 'rating-item';
 
-                const percentage = (rating.score / 5) * 100;
+                    const percentage = (rating.score / 5) * 100;
 
-                ratingItem.innerHTML = `
+                    ratingItem.innerHTML = `
                     <div class="rating-text">${rating.text}</div>
                     <div class="rating-bar">
                         <div class="rating-fill" style="width: 0%; background: ${rating.color};"></div>
@@ -598,51 +604,51 @@
                     <div class="rating-score" style="color: ${rating.color};">${rating.score}</div>
                 `;
 
-                // חלוקה בין העמודות
-                if (index < Math.ceil(ratings.length / 2)) {
-                    leftColumn.appendChild(ratingItem);
-                } else {
-                    rightColumn.appendChild(ratingItem);
-                }
+                    // חלוקה בין העמודות
+                    if (index < Math.ceil(ratings.length / 2)) {
+                        leftColumn.appendChild(ratingItem);
+                    } else {
+                        rightColumn.appendChild(ratingItem);
+                    }
 
-                // אנימציה מתעכבת
+                    // אנימציה מתעכבת
+                    setTimeout(() => {
+                        ratingItem.querySelector('.rating-fill').style.width = `${percentage}%`;
+                    }, (index % Math.ceil(ratings.length / 2)) * 150 + 500);
+                });
+
+                container.appendChild(leftColumn);
+                container.appendChild(rightColumn);
+            }
+
+            // יצירת המשובים
+            function createFeedbacks() {
+                const container = document.getElementById('feedbackContainer');
+                feedbacks.forEach((feedback, index) => {
+                    const feedbackItem = document.createElement('div');
+                    feedbackItem.className = 'feedback-item';
+                    feedbackItem.style.opacity = '0';
+                    feedbackItem.style.transform = 'translateY(20px)';
+                    feedbackItem.innerHTML = `<div class="feedback-text">${feedback}</div>`;
+                    container.appendChild(feedbackItem);
+
+                    // אנימציה כניסה
+                    setTimeout(() => {
+                        feedbackItem.style.opacity = '1';
+                        feedbackItem.style.transform = 'translateY(0)';
+                        feedbackItem.style.transition = 'all 0.5s ease';
+                    }, index * 100 + 1000);
+                });
+            }
+
+            // אתחול הדף
+            window.addEventListener('load', () => {
                 setTimeout(() => {
-                    ratingItem.querySelector('.rating-fill').style.width = `${percentage}%`;
-                }, (index % Math.ceil(ratings.length / 2)) * 150 + 500);
+                    createRatings();
+                    createFeedbacks();
+                }, 500);
             });
-
-            container.appendChild(leftColumn);
-            container.appendChild(rightColumn);
-        }
-
-        // יצירת המשובים
-        function createFeedbacks() {
-            const container = document.getElementById('feedbackContainer');
-            feedbacks.forEach((feedback, index) => {
-                const feedbackItem = document.createElement('div');
-                feedbackItem.className = 'feedback-item';
-                feedbackItem.style.opacity = '0';
-                feedbackItem.style.transform = 'translateY(20px)';
-                feedbackItem.innerHTML = `<div class="feedback-text">${feedback}</div>`;
-                container.appendChild(feedbackItem);
-
-                // אנימציה כניסה
-                setTimeout(() => {
-                    feedbackItem.style.opacity = '1';
-                    feedbackItem.style.transform = 'translateY(0)';
-                    feedbackItem.style.transition = 'all 0.5s ease';
-                }, index * 100 + 1000);
-            });
-        }
-
-        // אתחול הדף
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                createRatings();
-                createFeedbacks();
-            }, 500);
-        });
-    </script>
+        </script>
 </body>
 
 </html>
