@@ -9,8 +9,8 @@ import os
 import shutil
 
 
-instructor_name_hebrew = "שי אשכנזי"
-instructor_name_english = "Shay Ashkenazi"
+instructor_name_hebrew = "אירית עציון"
+instructor_name_english = "Irit Etzion"
 threshold = 4.5
 
 # Generate a random directory name based on the instructor's name and a random string
@@ -38,7 +38,7 @@ def analyze_data(df: pd.DataFrame):
     feedbacks = df['בנימה אישית, רציתי לאמר ש.......'].tolist()
     feedbacks = [feedback.replace('\n', ' ') for feedback in feedbacks if pd.notna(feedback)]
     final_data['משובים מילוליים מהמשתתפים'] = feedbacks
-    dir_path = os.path.join(parent_dir, dirName)
+    dir_path = os.path.join(parent_dir, 'courses/' + dirName)
     print(dir_path)
     if not os.path.exists(dir_path):
         os.mkdir(dir_path)
