@@ -102,22 +102,68 @@ data.then((data) => {
         experience: {
             labels: devidedData_expirience.labels,
             data: devidedData_expirience.data,
-            colors: ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57'],
+            colors: [
+                '#ff6b6b', // coral red
+                '#4ecdc4', // turquoise
+                '#45b7d1', // sky blue
+                '#96ceb4', // mint green
+                '#feca57', // warm yellow
+                '#ff9f43', // orange peel
+                '#54a0ff', // vivid blue
+                '#1dd1a1', // fresh green
+                '#f8a5c2', // soft pink
+                '#c8d6e5', // soft blue-gray
+                '#ffb8b8', // light coral
+                '#ffeaa7', // light pastel yellow
+            ],
         },
         framework: {
             labels: devidedData_misgarot.labels,
             data: devidedData_misgarot.data,
-            colors: ['#667eea', '#764ba2'],
+            colors: [
+                '#667eea', // indigo
+                '#764ba2', // purple
+                '#a18cd1', // soft lavender
+                '#8e9eab', // grayish blue
+                '#b8c6db', // pastel blue-gray
+                '#c3aed6', // muted lavender
+                '#d3cce3', // soft purple haze
+                '#8895e6', // mid-tone blue
+                '#aa96da', // light purple
+                '#e0c3fc', // pastel lilac
+            ],
         },
         stage: {
             labels: devidedData_stage.labels,
             data: devidedData_stage.data,
-            colors: ['#4facfe', '#00f2fe', '#a8edea', '#fed6e3', '#694ffe'],
+            colors: [
+                '#4facfe', // vibrant blue
+                '#00f2fe', // electric cyan
+                '#a8edea', // pastel aqua
+                '#fed6e3', // soft pink
+                '#694ffe', // deep vibrant indigo
+                '#90f7ec', // fresh aqua mint
+                '#c3cfe2', // gentle lavender-blue
+                '#fbc2eb', // dreamy pink
+                '#a18cd1', // lavender (reused for harmony)
+                '#b5ead7', // soft mint
+            ],
         },
         supervision: {
             labels: devidedData_supervision.labels,
             data: devidedData_supervision.data,
-            colors: ['#d299c2', '#fef9d7', '#a2d5c6'],
+            colors: [
+                '#d299c2', // dusty pink-purple
+                '#fef9d7', // very light yellow
+                '#a2d5c6', // muted mint
+                '#f6d1c1', // peachy pastel
+                '#c9d6ff', // soft periwinkle
+                '#e2f0cb', // light greenish yellow
+                '#ffe0ac', // soft orange beige
+                '#f9f3ec', // near-white beige
+                '#e3c9e8', // pale lilac pink
+                '#b2f7ef', // aqua pastel
+            ],
         },
     }
 
