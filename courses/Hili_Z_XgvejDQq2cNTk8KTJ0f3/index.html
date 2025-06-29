@@ -105,11 +105,18 @@
         }
 
         .chart-container {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            min-width: 0;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             background: white;
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-            height: 420px;
             position: relative;
         }
 
@@ -119,6 +126,16 @@
             color: #4a5568;
             font-size: 1.4em;
             font-weight: 600;
+        }
+
+        .chart-container canvas {
+            width: 100% !important;
+            height: auto !important;
+            max-width: 350px;
+            max-height: 250px;
+            min-width: 0;
+            aspect-ratio: 1 / 1;
+            display: block;
         }
 
         .ratings-section {
@@ -384,25 +401,309 @@
         }
 
         @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 20px;
+                border-radius: 15px;
+            }
+
+            .header {
+                padding: 20px;
+                margin-bottom: 30px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+                line-height: 1.3;
+            }
+
+            .header .subtitle {
+                font-size: 1.1em;
+            }
+
+            .stats-overview {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                margin-bottom: 30px;
+            }
+
+            .stat-card {
+                padding: 20px;
+            }
+
+            .stat-card .number {
+                font-size: 2.5em;
+            }
+
+            .stat-card .label {
+                font-size: 1.1em;
+            }
+
             .dashboard-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .chart-container {
+                height: 300px;
+                padding: 20px;
+            }
+
+            .chart-container h3 {
+                font-size: 1.2em;
+                margin-bottom: 15px;
+            }
+
+            .ratings-section {
+                padding: 25px;
+            }
+
+            .ratings-title {
+                font-size: 1.4em;
+                margin-bottom: 20px;
             }
 
             .ratings-grid {
                 grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .rating-item {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+
+            .rating-text {
+                margin-bottom: 10px;
+                font-size: 1em;
+            }
+
+            .rating-bar {
+                width: 100%;
+                height: 20px;
+                margin: 10px 0;
+            }
+
+            .rating-score {
+                align-self: flex-end;
+                font-size: 1.2em;
+            }
+
+            .feedback-section {
+                padding: 25px;
+            }
+
+            .feedback-section h3 {
+                font-size: 1.4em;
+                margin-bottom: 20px;
             }
 
             .feedback-grid {
                 grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .feedback-item {
+                padding: 20px;
+            }
+
+            .feedback-text {
+                font-size: 1em;
+            }
+
+            .demographic-section {
+                padding: 25px;
+            }
+
+            .demographic-title {
+                font-size: 1.4em;
+                margin-bottom: 20px;
+            }
+
+            .summary-section {
+                padding: 25px;
+            }
+
+            .summary-section h3 {
+                font-size: 1.5em;
+            }
+
+            .summary-text {
+                font-size: 1em;
+            }
+
+            .highlight {
+                padding: 20px;
+                font-size: 1.1em;
+                margin: 20px 0;
+            }
+
+            .highlight::before,
+            .highlight::after {
+                font-size: 1.5em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 5px;
+            }
+
+            .container {
+                padding: 15px;
+                border-radius: 10px;
+            }
+
+            .header {
+                padding: 15px;
             }
 
             .header h1 {
-                font-size: 2.2em;
+                font-size: 1.5em;
+            }
+
+            .header .subtitle {
+                font-size: 1em;
+            }
+
+            .stat-card {
+                padding: 15px;
+            }
+
+            .stat-card .number {
+                font-size: 2em;
+            }
+
+            .stat-card .label {
+                font-size: 1em;
             }
 
             .chart-container {
-                height: 350px;
-                min-width: auto;
+                height: 250px;
+                padding: 15px;
+            }
+
+            .chart-container h3 {
+                font-size: 1.1em;
+            }
+
+            .ratings-section,
+            .feedback-section,
+            .demographic-section {
+                padding: 20px;
+            }
+
+            .ratings-title,
+            .feedback-section h3,
+            .demographic-title {
+                font-size: 1.3em;
+            }
+
+            .rating-item {
+                padding: 12px;
+            }
+
+            .rating-text {
+                font-size: 0.95em;
+            }
+
+            .rating-bar {
+                height: 18px;
+            }
+
+            .feedback-item {
+                padding: 15px;
+            }
+
+            .feedback-text {
+                font-size: 0.95em;
+            }
+
+            .summary-section {
+                padding: 20px;
+            }
+
+            .summary-section h3 {
+                font-size: 1.3em;
+            }
+
+            .summary-text {
+                font-size: 0.95em;
+            }
+
+            .highlight {
+                padding: 15px;
+                font-size: 1em;
+            }
+
+            .highlight::before,
+            .highlight::after {
+                font-size: 1.2em;
+            }
+
+            .chart-container canvas {
+                max-width: 220px;
+                max-height: 180px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .header h1 {
+                font-size: 1.3em;
+            }
+
+            .stat-card .number {
+                font-size: 1.8em;
+            }
+
+            .chart-container {
+                height: 200px;
+            }
+
+            .rating-bar {
+                height: 16px;
+            }
+
+            .rating-score {
+                font-size: 1.1em;
+            }
+        }
+
+        /* Landscape orientation adjustments for mobile */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .stats-overview {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .chart-container {
+                height: 200px;
+            }
+
+            .ratings-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Touch-friendly improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .stat-card:hover,
+            .rating-item:hover,
+            .feedback-item:hover {
+                transform: none;
+            }
+
+            .rating-item,
+            .feedback-item {
+                min-height: 44px; /* Minimum touch target size */
+            }
+
+            .rating-bar {
+                min-height: 20px; /* Larger touch target for mobile */
             }
         }
     </style>
