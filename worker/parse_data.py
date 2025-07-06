@@ -9,8 +9,8 @@ import os
 import shutil
 
 
-instructor_name_hebrew = "שי אשכנזי"
-instructor_name_english = "Shay Ashkenazi"
+instructor_name_hebrew = "הילי זוורו"
+instructor_name_english = "Hili Z"
 threshold = 4.5
 
 # Generate a random directory name based on the instructor's name and a random string
