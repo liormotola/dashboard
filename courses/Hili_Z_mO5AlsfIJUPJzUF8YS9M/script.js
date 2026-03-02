@@ -23,7 +23,7 @@ function createChart(canvasId, data, type = 'doughnut') {
                     position: 'bottom',
                     labels: {
                         usePointStyle: true,
-                        padding: 20,
+                        // padding: 20,
                         font: {
                             size: 13,
                         },

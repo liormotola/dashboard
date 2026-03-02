@@ -9,8 +9,13 @@ import os
 import shutil
 
 
+<<<<<<< HEAD
 instructor_name_hebrew = "גילי סלעי"
 instructor_name_english = "Gili Salee"
+=======
+instructor_name_hebrew = "הילי זוורו"
+instructor_name_english = "Hili Z"
+>>>>>>> 3c0257d4542213dbd5942798f5f1a52205961c81
 threshold = 4.5
 
 # Generate a random directory name based on the instructor's name and a random string
@@ -27,7 +32,7 @@ def analyze_data(df: pd.DataFrame):
     means = df[numerical_col2].mean()
     final_data = {key: round(val,2) for key, val in means.to_dict().items()}
     final_data["threshold"] = threshold
-    final_data["above_threshold"] = sum(1 for val in final_data.values() if val > threshold) == len(numerical_col2)
+    final_data["above_threshold"] = sum(1 for val in final_data.values() if val >= threshold) == (len(numerical_col2)+1)
     # Count value occurrences for each categorical column
     for col in categorical_cols:
         final_data[col]=df[col].value_counts(dropna=False).to_dict()
