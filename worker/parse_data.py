@@ -10,8 +10,8 @@ import shutil
 
 
 
-instructor_name_hebrew = "גילי סלעי"
-instructor_name_english = "Gili Salee"
+instructor_name_hebrew = "ד\"ר אורלי תורן"
+instructor_name_english = "Orly Toren"
 
 threshold = 4.5
 
